@@ -20,17 +20,15 @@ class configDB {
      }
 
      private function connect(){
-      var_dump(
-    getenv('DB_HOST'),
-    getenv('DB_PORT'),
-    getenv('DB_NAME'),
-    getenv('DB_USER'),
-    getenv('DB_PASSWORD')
-);
-die();
 
-        self::$instance = new PDO(self::$host,self::$user,self::$pass);
-     }
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::MYSQL_ATTR_SSL_CA => __DIR__ . '/skysql_chain.pem'
+    ];
+
+    self::$instance = new PDO(self::$host, self::$user, self::$pass, $options);
+}
+
 
      private function getValues(){
         
