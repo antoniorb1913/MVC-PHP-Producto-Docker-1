@@ -24,10 +24,22 @@ class configDB {
      }
 
      private function getValues(){
-        $conf =  parse_ini_file('config.ini');
-        self::$host = $conf['host'];
-        self::$user = $conf['user'];
-        self::$pass = $conf['pass'];
+
+      if (getenv('DB_HOST')){
+         
+         self::$host = getenv('DB_HOST');
+         self::$user = getenv('DB_USER');
+         self::$pass = getenv('DB_PASS');
+
+
+      } else {
+
+         $conf =  parse_ini_file('config.ini');
+         self::$host = $conf['host'];
+         self::$user = $conf['user'];
+         self::$pass = $conf['pass'];
+      }
+      
      }
 
      /**
